@@ -23,6 +23,7 @@
     padding: 25px;
   }
   
+  
   .search-box {
     margin: 30px;
   background: none;
@@ -73,7 +74,17 @@
   .weather-box {
     text-align: center;
   }
-  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.8);
+    }
+    50% {
+      box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+    }
+    100% {
+      box-shadow: 0px 0px 50px  rgba(255, 255, 255, 0.8);
+    }
+  }
   .weather-box .temp {
     position: relative;
     display: inline-block;
@@ -89,8 +100,7 @@
     box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
     border-radius: 50px;
     
-    box-shadow: 20px 20px 60px #bebebe,
-               -20px -20px 60px #ffffff;
+   animation: pulse 2s infinite;
   }
   
   .weather-box .weather {
@@ -99,3 +109,9 @@
     font-weight: 700;
     text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
   }
+
+  .weather-box .emoji {
+    font-size: 34px; 
+    margin-bottom: 10px; 
+  }
+  
