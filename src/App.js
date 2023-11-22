@@ -47,6 +47,7 @@ function App() {
   return (
     <div className="app">
       <main>
+        <div className="title">Enter a city to see the humidity percentage</div>
         <div className="search-box">
           <input
             type="text"
@@ -57,7 +58,7 @@ function App() {
             onKeyPress={search}
           />
         </div>
-        {loading && <div>Loading...</div>}
+        {loading && <div className="loading-spinner"></div>}
         {error && <div>{error}</div>}
         {typeof weather.main !== 'undefined' && !loading && !error && (
           <div>
