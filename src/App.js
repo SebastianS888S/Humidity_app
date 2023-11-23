@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 
 const api = {
-  key:"63ab5b543a9a8b6a21c5a1214e0e2caf",
-  base:"https://api.openweathermap.org/data/2.5/"
-}
+  key: "63ab5b543a9a8b6a21c5a1214e0e2caf",
+  base: "https://api.openweathermap.org/data/2.5/"
+};
 
-
-const  dateBuilder = (d) =>{
+const dateBuilder = (d) => {
   let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   let day = days[d.getDay()];
   let date = d.getDate();
   let month = months[d.getMonth()];
-  let year = d.getFullYear(); 
+  let year = d.getFullYear();
 
-  return `${day} ${date} ${month} ${year}`
-}
+  return `${day} ${date} ${month} ${year}`;
+};
 
 function App() {
   const [query, setQuery] = useState('');
@@ -30,13 +29,20 @@ function App() {
       setError(null);
 
       fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error('Location not found');
+          }
+          return res.json();
+        })
         .then((result) => {
           setWeather(result);
           setQuery('');
         })
         .catch((error) => {
-          setError('Error fetching data. Please try again.');
+          if (error.message === 'Location not found') {
+            alert('This location does not exist. Look for something else.');
+          }
         })
         .finally(() => {
           setLoading(false);
@@ -89,4 +95,3 @@ function App() {
 }
 
 export default App;
-
