@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const api = {
   key: "63ab5b543a9a8b6a21c5a1214e0e2caf",
@@ -20,6 +20,7 @@ const dateBuilder = (d) => {
 function App() {
   const [query, setQuery] = useState('');
   const [weather, setWeather] = useState({});
+  const [forecast, setForecast] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -28,20 +29,25 @@ function App() {
       setLoading(true);
       setError(null);
 
-      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error('Location not found');
-          }
-          return res.json();
-        })
-        .then((result) => {
-          setWeather(result);
+      Promise.all([
+        fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`).then((res) => res.json()),
+        fetch(`${api.base}forecast?q=${query}&units=metric&APPID=${api.key}`).then((res) => res.json())
+      ])
+        .then(([currentWeather, forecastData]) => {
+          setWeather(currentWeather);
           setQuery('');
+
+          // Extract daily forecast data
+          const dailyForecast = forecastData.list.filter(entry => entry.dt_txt.includes("12:00:00"));
+
+          // Update forecast state
+          setForecast(dailyForecast);
         })
         .catch((error) => {
+          setError(<div className="err">This location does not exist. Look for something else.</div>);
+
           if (error.message === 'Location not found') {
-            alert('This location does not exist. Look for something else.');
+            alert('<div className="err">This location does not exist. Look for something else.</div>');
           }
         })
         .finally(() => {
@@ -49,6 +55,11 @@ function App() {
         });
     }
   };
+
+  useEffect(() => {
+    // Set the default location (you can modify this if needed)
+    setQuery('YourDefaultCity');
+  }, []);
 
   return (
     <div className="app">
@@ -86,6 +97,16 @@ function App() {
               )}
               <div className="temp">{weather.main.humidity}% humidity</div>
               <div className="weather">{weather.weather[0].main}</div>
+            </div>
+            <div className="forecast-box">
+              <h2>7-Day Forecast</h2>
+              <ul>
+                {forecast.map((entry) => (
+                  <li key={entry.dt}>
+                    {`Day: ${entry.dt_txt.slice(8, 10)}.${entry.dt_txt.slice(5, 7)} ${dateBuilder(new Date(entry.dt_txt))}: ${entry.main.humidity}% humidity`}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         )}

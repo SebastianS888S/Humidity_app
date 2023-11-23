@@ -140,3 +140,11 @@
     margin: 0 auto;
   }
   
+.err{
+  color: red;
+  padding: 5px;
+  width: 25rem;
+  margin-left: 35px;
+  border-radius: 10px;
+  background-color: black;
+}
