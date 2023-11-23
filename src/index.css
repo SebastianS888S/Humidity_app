@@ -148,3 +148,46 @@
   border-radius: 10px;
   background-color: black;
 }
+
+/* Adaugă aceste stiluri la fișierul tău CSS existent */
+
+.forecast-box {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.forecast-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.forecast-item {
+  margin: 10px;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.forecast-date {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.forecast-info {
+  margin-top: 10px;
+}
+
+.forecast-day {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.forecast-humidity {
+  font-size: 14px;
+  opacity: 0.8;
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const api = {
   key: "63ab5b543a9a8b6a21c5a1214e0e2caf",
@@ -37,17 +37,15 @@ function App() {
           setWeather(currentWeather);
           setQuery('');
 
-          // Extract daily forecast data
           const dailyForecast = forecastData.list.filter(entry => entry.dt_txt.includes("12:00:00"));
 
-          // Update forecast state
           setForecast(dailyForecast);
         })
         .catch((error) => {
           setError(<div className="err">This location does not exist. Look for something else.</div>);
 
           if (error.message === 'Location not found') {
-            alert('<div className="err">This location does not exist. Look for something else.</div>');
+            alert('This location does not exist. Look for something else.');
           }
         })
         .finally(() => {
@@ -56,10 +54,7 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    // Set the default location (you can modify this if needed)
-    setQuery('YourDefaultCity');
-  }, []);
+ 
 
   return (
     <div className="app">
