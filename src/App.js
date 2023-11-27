@@ -59,6 +59,7 @@ function App() {
   return (
     <div className="app">
       <main>
+      <div className="title">Humidity App</div>
         <div className="title">Enter a city to see the humidity percentage</div>
         <div className="search-box">
           <input
