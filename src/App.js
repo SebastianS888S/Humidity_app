@@ -95,7 +95,7 @@ function App() {
               <div className="weather">{weather.weather[0].main}</div>
             </div>
             <div className="forecast-box">
-              <h2 className="forcastTitle">7-Day Forecast</h2>
+              <h2 className="forcastTitle">Next days</h2>
                 <ul className="forecast-list">
                    {forecast.map((entry) => (
                    <li key={entry.dt} className="forecast-item">
