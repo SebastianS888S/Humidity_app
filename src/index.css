@@ -149,8 +149,6 @@
   background-color: black;
 }
 
-/* Adaugă aceste stiluri la fișierul tău CSS existent */
-
 .forecast-box {
   margin-top: 30px;
   text-align: center;
@@ -163,6 +161,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  color: #FFF;
+}
+
+.forcastTitle{
+  color: #fff;
 }
 
 .forecast-item {

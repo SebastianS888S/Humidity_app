@@ -95,15 +95,21 @@ function App() {
               <div className="weather">{weather.weather[0].main}</div>
             </div>
             <div className="forecast-box">
-              <h2>7-Day Forecast</h2>
-              <ul>
-                {forecast.map((entry) => (
-                  <li key={entry.dt}>
-                    {`Day: ${entry.dt_txt.slice(8, 10)}.${entry.dt_txt.slice(5, 7)} ${dateBuilder(new Date(entry.dt_txt))}: ${entry.main.humidity}% humidity`}
-                  </li>
-                ))}
-              </ul>
+              <h2 className="forcastTitle">7-Day Forecast</h2>
+                <ul className="forecast-list">
+                   {forecast.map((entry) => (
+                   <li key={entry.dt} className="forecast-item">
+                    <div className="forecast-date">
+                    {` ${dateBuilder(new Date(entry.dt_txt))}`}
+             </div>
+               <div className="forecast-info">
+                <div className="forecast-day">{entry.weather[0].main}</div>
+                 <div className="forecast-humidity">{`${entry.main.humidity}% humidity`}</div>
             </div>
+           </li>
+                     ))}
+                    </ul>
+              </div>
           </div>
         )}
       </main>
